@@ -135,7 +135,7 @@ export function CardInput({ onChange, autoFocus }: CardInputProps) {
   return (
     <div className="space-y-2">
       <div className="relative flex items-center gap-3">
-        <div className="flex flex-1 items-center rounded-xl border border-gray-200 bg-white px-3 py-2.5 transition-all focus-within:border-gray-900 focus-within:ring-2 focus-within:ring-gray-900/10">
+        <div className="flex flex-1 items-center rounded-xl border border-gray-200 bg-white px-3 py-3.5 transition-all focus-within:border-gray-900 focus-within:ring-2 focus-within:ring-gray-900/10">
           <input
             ref={inputRef}
             type="text"

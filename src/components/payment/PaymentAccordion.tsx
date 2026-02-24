@@ -195,7 +195,7 @@ export function PaymentAccordion({ savedCards, onMethodSelect, onSubmit }: Payme
       case "phone":
         return (
           <div className="space-y-3">
-            <div className="flex items-center rounded-xl border border-gray-200 bg-white px-3 py-2 transition-all focus-within:border-gray-900 focus-within:ring-2 focus-within:ring-gray-900/10">
+            <div className="flex items-center rounded-xl border border-gray-200 bg-white px-3 py-3.5 transition-all focus-within:border-gray-900 focus-within:ring-2 focus-within:ring-gray-900/10">
               <Phone className="mr-3 h-5 w-5 text-gray-400" />
               <input
                 ref={phoneInputRef}
