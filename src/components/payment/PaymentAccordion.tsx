@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router";
 import { ChevronDown, Phone, CreditCard, Smartphone } from "lucide-react";
 import type { PaymentMethod, SavedCard } from "./types";
 import { CardInput } from "./CardInput";
@@ -10,6 +11,7 @@ interface PaymentAccordionProps {
 }
 
 export function PaymentAccordion({ savedCards, onMethodSelect, onSubmit }: PaymentAccordionProps) {
+  const navigate = useNavigate();
   const [openMethod, setOpenMethod] = useState<PaymentMethod | null>("kasi");
   const [selectedCardId, setSelectedCardId] = useState<string | "new">("new");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -93,7 +95,10 @@ export function PaymentAccordion({ savedCards, onMethodSelect, onSubmit }: Payme
       case "kasi":
         return (
           <button
-            onClick={() => onSubmit?.("kasi")}
+            onClick={() => {
+              onSubmit?.("kasi");
+              navigate("/success");
+            }}
             className="w-full rounded-xl bg-[#F14635] py-3.5 font-semibold text-white transition-all hover:bg-[#D93D2E] active:scale-[0.98]"
           >
             Оплатить через Kaspi
@@ -103,7 +108,10 @@ export function PaymentAccordion({ savedCards, onMethodSelect, onSubmit }: Payme
       case "apple":
         return (
           <button
-            onClick={() => onSubmit?.("apple")}
+            onClick={() => {
+              onSubmit?.("apple");
+              navigate("/success");
+            }}
             className="flex w-full items-center justify-center gap-2 rounded-xl bg-black py-3.5 font-semibold text-white transition-all hover:bg-gray-900 active:scale-[0.98]"
           >
             <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
@@ -183,7 +191,10 @@ export function PaymentAccordion({ savedCards, onMethodSelect, onSubmit }: Payme
             ))}
 
             <button
-              onClick={() => onSubmit?.("card", { cardId: selectedCardId })}
+              onClick={() => {
+                onSubmit?.("card", { cardId: selectedCardId });
+                navigate("/3ds");
+              }}
               disabled={selectedCardId === "new" && !isNewCardValid}
               className="mt-4 w-full rounded-xl bg-gray-900 py-3.5 font-semibold text-white transition-all hover:bg-gray-800 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
             >
@@ -209,7 +220,10 @@ export function PaymentAccordion({ savedCards, onMethodSelect, onSubmit }: Payme
             </div>
             <p className="text-xs text-gray-400">Сумма будет списана с баланса телефона</p>
             <button
-              onClick={() => onSubmit?.("phone", { phone: phoneNumber })}
+              onClick={() => {
+                onSubmit?.("phone", { phone: phoneNumber });
+                navigate("/success");
+              }}
               disabled={phoneNumber.replace(/\D/g, "").length !== 11}
               className="w-full rounded-xl bg-gray-900 py-3.5 font-semibold text-white transition-all hover:bg-gray-800 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
             >
